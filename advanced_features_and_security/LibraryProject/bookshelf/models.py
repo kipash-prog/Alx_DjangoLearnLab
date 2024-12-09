@@ -1,6 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
+    publication_year = models.IntegerField()
+
+    def __str__(self):
+        return self.title
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, date_of_birth, profile_photo, password=None):
         if not email:
