@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import SocialMediaUser
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
+from .models import SocialMediaUser
 
 class SocialMediaUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,8 +9,10 @@ class SocialMediaUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
-        model = SocialMediaUser
+        model = get_user_model()
         fields = ('username', 'password', 'email', 'first_name', 'last_name')
         extra_kwargs = {'password': {'write_only': True}}
 
