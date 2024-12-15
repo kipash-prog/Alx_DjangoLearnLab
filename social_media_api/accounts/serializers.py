@@ -3,6 +3,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from .models import SocialMediaUser
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 
 
@@ -34,3 +35,12 @@ class SocialMediaUserSerializer(serializers.ModelSerializer):
         model = SocialMediaUser
         fields = '__all__'
         
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return {'user': user}
+        raise serializers.ValidationError("Invalid credentials")
