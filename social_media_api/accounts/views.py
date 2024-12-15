@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from .models import SocialMediaUser
 from rest_framework.decorators import action
-from .serializers import SocialMediaUserSerializer, RegisterSerializer
+from .serializers import SocialMediaUserSerializer, RegisterSerializer,LoginSerializer
 from django.contrib.auth.models import User
 
 class RegisterView(generics.CreateAPIView):
