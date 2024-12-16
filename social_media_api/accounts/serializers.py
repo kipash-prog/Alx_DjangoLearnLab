@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-from .models import SocialMediaUser
+from .models import SocialMediaUser as CustomUser
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
@@ -32,7 +32,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     
 class SocialMediaUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SocialMediaUser
+        model = CustomUser
         fields = '__all__'
         
 class LoginSerializer(serializers.Serializer):
