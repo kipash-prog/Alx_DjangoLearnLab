@@ -7,5 +7,5 @@ class Book(models.Model):
     publication_year=models.DateTimeField(auto_add_now=True)
 
 class Author(models.Model):
-    name=models.CharField(max_length=180)
+    name=models.CharField(max_length=180,many=True, read_only=True)
     
