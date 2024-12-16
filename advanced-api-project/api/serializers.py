@@ -7,3 +7,7 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
+
+    def validate(self,data):
+        if data['name'] is None:
+            return serializers.ValidationError("Book is Not Found")
