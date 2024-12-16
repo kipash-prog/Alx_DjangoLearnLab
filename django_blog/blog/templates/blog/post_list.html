@@ -1,0 +1,14 @@
+
+{% block content %}
+  <h2>Blog Posts</h2>
+  <a href="{% url 'post_create' %}">Create New Post</a>
+  <ul>
+    {% for post in posts %}
+      <li>
+        <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <p>by {{ post.author }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
