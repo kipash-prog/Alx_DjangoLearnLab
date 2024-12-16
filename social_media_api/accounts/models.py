@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class SocialMediaUser(AbstractUser):
     bio=models.TextField(blank=True,null=True)
     profile_picture=models.ImageField(upload_to='images')
-    followers=models.ManyToManyField('self',symmetrical=False)
+    following=models.ManyToManyField('self',symmetrical=False)
     
     
     groups = models.ManyToManyField(
