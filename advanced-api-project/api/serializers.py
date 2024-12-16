@@ -13,7 +13,8 @@ class BookSerializer(serializers.ModelSerializer):
             return serializers.ValidationError("Book is Not Found")
 
 class AuthorSerializer(serializers.ModelSerializer):
-
+    name=serializers.CharField((many=True, read_only=True)
+    
     class Meta:
         model=Author
         fields='__all__'
