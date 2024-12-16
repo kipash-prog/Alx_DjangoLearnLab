@@ -13,7 +13,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('profile/', UserDetailView.as_view(), name='profile'),
-    path('follow/<int:pk>/', SocialMediaUserViewSet.as_view({'post': 'follow_user'}), name='follow-user'),
-    path('unfollow/<int:pk>/', SocialMediaUserViewSet.as_view({'post': 'unfollow_user'}), name='unfollow-user'),
+    path('follow/<int:user_id>/', SocialMediaUserViewSet.as_view({'post': 'follow_user'}), name='follow-user'),
+    path('unfollow/<int:user_id>/', SocialMediaUserViewSet.as_view({'post': 'unfollow_user'}), name='unfollow-user'),
 ]
 
