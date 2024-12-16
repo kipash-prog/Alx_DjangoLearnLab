@@ -10,7 +10,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    followers=models.ManyToManyField('self',symmetrical=False)
+    followings=models.ManyToManyField('self',symmetrical=False)
     def __str__(self):
         return self.title
 
