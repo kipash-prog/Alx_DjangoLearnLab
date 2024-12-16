@@ -2,13 +2,13 @@ from rest_framework import generics, permissions, viewsets, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-from .models import SocialMediaUser
+from .models import SocialMediaUser as CustomUser
 from rest_framework.decorators import action
 from .serializers import SocialMediaUserSerializer, RegisterSerializer,LoginSerializer
 from django.contrib.auth.models import User
 
 class RegisterView(generics.CreateAPIView):
-    queryset = SocialMediaUser.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -16,7 +16,7 @@ class LoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(LoginView, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
-        user = SocialMediaUser.objects.get(id=token.user_id)
+        user = CustomUser.objects.get(id=token.user_id)
         return Response({
             'token': token.key,
             'user_id': user.pk,
@@ -24,7 +24,7 @@ class LoginView(ObtainAuthToken):
         })
 
 class UserDetailView(generics.RetrieveAPIView):
-    queryset = SocialMediaUser.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = SocialMediaUserSerializer
     permission_classes = [permissions.IsAuthenticated]
     
@@ -43,7 +43,7 @@ class LoginView(generics.GenericAPIView):
         })
 
 class SocialMediaUserViewSet(viewsets.ModelViewSet):
-    queryset = SocialMediaUser.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = SocialMediaUserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -65,7 +65,7 @@ class SocialMediaUserViewSet(viewsets.ModelViewSet):
     
 
 class SocialMediaUserViewSet(viewsets.ModelViewSet):
-    queryset = SocialMediaUser.objects.all()
+    queryset = CustomUser.objects.all()
     serializer_class = SocialMediaUserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
