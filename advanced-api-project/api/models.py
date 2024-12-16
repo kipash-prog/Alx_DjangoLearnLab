@@ -4,6 +4,7 @@ from django.db import models
 class Book(models.Model):
     author=models.CharField(max_length=180)
     title=models.CharField(max_length=180)
+    publication_year=models.DateTimeField(auto_add_now=True)
 
 class Author(models.Model):
     name=models.CharField(max_length=180)
