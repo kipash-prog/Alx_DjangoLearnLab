@@ -76,7 +76,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def like(self, request, pk=None):
         post = generics.get_object_or_404(Post, pk=pk)
         user = request.user
-        like, created = Like.objects.get_or_create(post=post, user=user)
+        like, created = Like.objects.get_or_create(user=request.user, post=post)
         if not created:
             return Response({'status': 'You have already liked this post'}, status=status.HTTP_400_BAD_REQUEST)
         Notification.objects.create(
@@ -91,7 +91,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def unlike(self, request, pk=None):
         post = generics.get_object_or_404(Post, pk=pk)
         user = request.user
-        like = Like.objects.filter(post=post, user=user).first()
+        like = Like.objects.get_or_create(user=request.user, post=post)
         if not like:
             return Response({'status': 'You have not liked this post'}, status=status.HTTP_400_BAD_REQUEST)
         like.delete()
